@@ -1,0 +1,21 @@
+<h2 class="page-title">Lista de Pessoas</h2>
+<button (click)="navegarParaAdicionar()" class="add-button">Adicionar Pessoa</button>
+
+<table class="pessoa-table">
+  <thead>
+  <tr>
+    <th>Nome</th>
+    <th>Idade</th>
+    <th>Ações</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let pessoa of pessoas">
+    <td>{{ pessoa.nome }}</td>
+    <td>{{ pessoa.idade }}</td>
+    <td>
+      <button (click)="visualizarPessoa(pessoa.id)" class="view-button">Visualizar</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

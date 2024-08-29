@@ -1,0 +1,14 @@
+<div class="container">
+  <h2 class="form-title">Visualizar Pessoa</h2>
+
+  <div *ngIf="pessoa; else noPessoa">
+    <p><strong>Nome:</strong> {{ pessoa.nome }}</p>
+    <p><strong>Idade:</strong> {{ pessoa.idade }}</p>
+  </div>
+
+  <ng-template #noPessoa>
+    <p>Nenhuma pessoa encontrada.</p>
+  </ng-template>
+
+  <button (click)="voltarParaLista()" class="back-button">Voltar para Lista</button>
+</div>
