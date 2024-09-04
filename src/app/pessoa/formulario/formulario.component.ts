@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormularioService } from "../../services/formulario.service";
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -17,28 +17,38 @@ import {FormsModule} from "@angular/forms";
 })
 export class FormularioComponent {
 
-  formulario: FormGroup;
+  formularioForm: FormGroup;
+  form: any[] = [];
 
   constructor(private fb: FormBuilder, private formularioService: FormularioService) {
-    this.formulario = this.fb.group({
-        nome: [''],
-        idade: [null]
-      });
-   }
-
-  ngOnInit(): void {
-    this.formulario = this.fb.group({
+    this.formularioForm = this.fb.group({
       nome: ['', [Validators.required]],
       idade: [null, [Validators.required, Validators.min(0)]]
     });
-  }
+   }
 
   adicionarFormulario(): void {
-    if (this.formulario.valid) {
-      this.formularioService.addFormulario(this.formulario.value);
-      this.formulario.reset();
+    /*if (this.formularioForm.valid) {
+      this.formularioService.addFormulario(this.formularioForm.value);
+
+    }*/
+
+    if (this.formularioForm.valid) {
+      this.formularioService.addFormulario(this.formularioForm.value).subscribe(
+        (response: any) => {
+          console.log('Usuário registrado com sucesso!', response);
+          this.form.push(response);
+        },
+        (error: any) => {
+          console.error('Erro ao registrar usuário', error);
+        }
+      );
+    } else {
+      console.log('Formulário inválido. Por favor, corrija os campos destacados.');
     }
   }
+
+
 
   /*formulario: Formulario = { id: 0, nome: '', idade: 0 };
 

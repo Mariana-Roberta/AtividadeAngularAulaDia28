@@ -12,11 +12,11 @@ public class Formulario {
     private Integer id;
 
     @Column(name = "NOME", nullable = false)
-    @NotEmpty(message = "O nome não pode estar vazio")
+    //@NotEmpty(message = "O nome não pode estar vazio")
     private String nome;
 
     @Column(name = "IDADE", nullable = false)
-    @NotNull(message = "A idade não pode ser nula")
+    //@NotNull(message = "A idade não pode ser nula")
     private int idade;
 
     public Formulario(Integer id, String nome, int idade) {

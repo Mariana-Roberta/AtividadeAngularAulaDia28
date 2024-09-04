@@ -41,8 +41,8 @@ import {
   getDOM
 } from "./chunk-2XWVCCXE.js";
 import "./chunk-6B4P2WFD.js";
-import "./chunk-5ZEQJQSU.js";
 import "./chunk-XHAAPIRZ.js";
+import "./chunk-5ZEQJQSU.js";
 import "./chunk-QXF6ZFKS.js";
 export {
   BrowserModule,

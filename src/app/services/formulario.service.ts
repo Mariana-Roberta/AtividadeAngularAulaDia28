@@ -3,7 +3,6 @@ import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
 
 
 
@@ -27,10 +26,12 @@ export class FormularioService {
   }
 
   addFormulario(formulario: { id: number, nome: string, idade: number }): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(`${this.apiUrl}/save`, formulario, { headers })
+    return this.http.post(`${this.apiUrl}/save`, formulario)
       .pipe(
-        catchError(this.handleError<any>('addFormulario'))
+        catchError((error) => {
+          console.error('Error occurred:', error);
+          return throwError(error);
+        })
       );
   }
 

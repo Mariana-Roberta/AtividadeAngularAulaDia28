@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/formulario")
-@CrossOrigin("*")
 public class FormularioController {
 
     @Autowired
@@ -19,14 +19,17 @@ public class FormularioController {
 
     @PostMapping("/save")
     public ResponseEntity<Formulario> save(@RequestBody FormularioDTO formularioDTO) {
+      System.out.println("Received DTO: " + formularioDTO);
+
         String nome = formularioDTO.getNome();
         int idade = formularioDTO.getIdade();
 
         Formulario formulario = new Formulario();
+        formulario.setId(1);
         formulario.setNome(nome);
         formulario.setIdade(idade);
 
-        this.formularioService.save(formulario);
+        formulario = this.formularioService.save(formulario);
 
         return ResponseEntity.ok(formulario);
     }
