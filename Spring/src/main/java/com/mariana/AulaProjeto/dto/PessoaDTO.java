@@ -1,6 +1,6 @@
 package com.mariana.AulaProjeto.dto;
 
-public class FormularioDTO {
+public class PessoaDTO {
     private Integer id;
     private String nome;
     private int idade;

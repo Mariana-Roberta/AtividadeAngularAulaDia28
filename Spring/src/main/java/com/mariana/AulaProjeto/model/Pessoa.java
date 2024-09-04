@@ -1,31 +1,28 @@
 package com.mariana.AulaProjeto.model;
 
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Objects;
 
 @Entity
-public class Formulario {
+public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "NOME", nullable = false)
-    //@NotEmpty(message = "O nome não pode estar vazio")
     private String nome;
 
     @Column(name = "IDADE", nullable = false)
-    //@NotNull(message = "A idade não pode ser nula")
     private int idade;
 
-    public Formulario(Integer id, String nome, int idade) {
+    public Pessoa(Integer id, String nome, int idade) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
     }
 
-    public Formulario() {}
+    public Pessoa() {}
 
     public Integer getId() {
         return id;
@@ -55,7 +52,7 @@ public class Formulario {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Formulario that = (Formulario) o;
+        Pessoa that = (Pessoa) o;
         return idade == that.idade && Objects.equals(id, that.id) && Objects.equals(nome, that.nome);
     }
 
@@ -66,7 +63,7 @@ public class Formulario {
 
     @Override
     public String toString() {
-        return "Formulario{" +
+        return "Pessoa{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", idade=" + idade +

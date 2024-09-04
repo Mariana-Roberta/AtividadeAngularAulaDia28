@@ -1,12 +1,12 @@
 package com.mariana.AulaProjeto.repository;
 
-import com.mariana.AulaProjeto.model.Formulario;
+import com.mariana.AulaProjeto.model.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface FormularioRepository extends JpaRepository<Formulario, Integer> {
-    List<Formulario> findByIdade(int idade);
+public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
+    List<Pessoa> findByIdade(int idade);
 }
