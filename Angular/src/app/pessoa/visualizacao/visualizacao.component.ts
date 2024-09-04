@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormularioService} from "../../services/formulario.service";
-import {Router} from "@angular/router";
-import {ActivatedRoute} from "@angular/router";
-import {NgIf} from "@angular/common";
+import { PessoaService } from "../../services/pessoa.service";
+import { Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
+import { NgIf } from "@angular/common";
 
 @Component({
   selector: 'app-visualizacao',
@@ -14,22 +14,34 @@ import {NgIf} from "@angular/common";
   styleUrl: './visualizacao.component.css'
 })
 export class VisualizacaoComponent implements OnInit {
-  formulario: any | undefined;
+
+  pessoa: any | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private formularioService: FormularioService,
+    private pessoaService: PessoaService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = +params.get('id')!;
-      this.formulario = this.formularioService.getFormularioById(id);
+      if (!isNaN(id)) {
+        this.pessoaService.getPessoaById(id).subscribe(
+          pessoa => {
+            this.pessoa = pessoa; // Atribui a resposta ao objeto pessoa
+          },
+          error => {
+            console.error('Erro ao buscar pessoa:', error); // Lida com o erro
+          }
+        );
+      } else {
+        console.error('ID inválido:', id);
+      }
     });
   }
 
   voltarParaLista(): void {
-    this.router.navigate(['/formulario/listaFormularios']);
+    this.router.navigate(['/pessoa/listagem']);
   }
 }

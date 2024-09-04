@@ -10,11 +10,11 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let formulario of formularios">
-    <td>{{ formulario.nome }}</td>
-    <td>{{ formulario.idade }}</td>
+  <tr *ngFor="let pessoa of pessoas">
+    <td>{{ pessoa.nome }}</td>
+    <td>{{ pessoa.idade }}</td>
     <td>
-      <button (click)="visualizarFormulario(formulario.id)" class="view-button">Visualizar</button>
+      <button (click)="visualizarPessoa(pessoa.id)" class="view-button">Visualizar</button>
     </td>
   </tr>
   </tbody>

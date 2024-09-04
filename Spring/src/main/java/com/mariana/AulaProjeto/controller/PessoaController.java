@@ -4,6 +4,7 @@ import com.mariana.AulaProjeto.dto.PessoaDTO;
 import com.mariana.AulaProjeto.model.Pessoa;
 import com.mariana.AulaProjeto.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/formulario")
+@RequestMapping("/pessoa")
 public class PessoaController {
 
     @Autowired
@@ -34,16 +35,20 @@ public class PessoaController {
         return ResponseEntity.ok(pessoa);
     }
 
-    @GetMapping("/listaFormularios")
-    public ResponseEntity<List<Pessoa>> getListaFormularios() {
+    @GetMapping("/listagem")
+    public ResponseEntity<List<Pessoa>> getListaPessoas() {
         List<Pessoa> listaPessoas = pessoaService.findAll();
         return ResponseEntity.ok(listaPessoas);
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<Pessoa> getFormularioById(@RequestParam Integer id) {
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Pessoa> getPessoaById(@PathVariable Integer id) {
         Pessoa pessoa = pessoaService.findById(id);
-        return ResponseEntity.ok(pessoa);
+        if (pessoa != null) {
+            return ResponseEntity.ok(pessoa);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
 

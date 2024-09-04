@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormularioService} from "../../services/formulario.service";
-import {Router} from "@angular/router";
-import {NgForOf} from "@angular/common";
+import { PessoaService } from "../../services/pessoa.service";
+import { Router } from "@angular/router";
+import { NgForOf } from "@angular/common";
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -17,15 +17,15 @@ import { throwError } from 'rxjs';
 })
 export class ListagemComponent implements OnInit {
 
-  formularios: any[] = [];
+  pessoas: any[] = [];
   error: string | null = null;
 
-  constructor(private formularioService: FormularioService, private router: Router) {
+  constructor(private pessoaService: PessoaService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.formularioService.getFormularios().subscribe({
-      next: (data) => this.formularios = data,
+    this.pessoaService.getPessoas().subscribe({
+      next: (data) => this.pessoas = data,
       error: (err) => this.error = 'Erro ao carregar os dados'
     });
   }
@@ -34,7 +34,7 @@ export class ListagemComponent implements OnInit {
     this.router.navigate(['/pessoa/formulario']); // ajuste a rota conforme necessário
   }
 
-  visualizarFormulario(id: number): void {
+  visualizarPessoa(id: number): void {
     this.router.navigate(['/pessoa/id', id]); // ajuste a rota conforme necessário
   }
 

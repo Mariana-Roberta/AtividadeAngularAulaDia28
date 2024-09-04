@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormularioService } from "../../services/formulario.service";
+import { PessoaService } from "../../services/pessoa.service";
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {Router} from "@angular/router";
-import {FormsModule} from "@angular/forms";
+import { Router } from "@angular/router";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-formulario',
@@ -17,30 +17,30 @@ import {FormsModule} from "@angular/forms";
 })
 export class FormularioComponent {
 
-  formularioForm: FormGroup;
-  form: any[] = [];
+  pessoaFormGroup: FormGroup;
+  pessoa: any[] = [];
 
-  constructor(private fb: FormBuilder, private formularioService: FormularioService) {
-    this.formularioForm = this.fb.group({
+  constructor(private fb: FormBuilder, private pessoaService: PessoaService) {
+    this.pessoaFormGroup = this.fb.group({
       nome: ['', [Validators.required]],
       idade: [null, [Validators.required, Validators.min(0)]]
     });
    }
 
-  adicionarFormulario(): void {
+  adicionarPessoa(): void {
     /*if (this.formularioForm.valid) {
       this.formularioService.addFormulario(this.formularioForm.value);
 
     }*/
 
-    if (this.formularioForm.valid) {
-      this.formularioService.addFormulario(this.formularioForm.value).subscribe(
+    if (this.pessoaFormGroup.valid) {
+      this.pessoaService.addPessoa(this.pessoaFormGroup.value).subscribe(
         (response: any) => {
-          console.log('Usuário registrado com sucesso!', response);
-          this.form.push(response);
+          console.log('Pessoa registrada com sucesso!', response);
+          this.pessoa.push(response);
         },
         (error: any) => {
-          console.error('Erro ao registrar usuário', error);
+          console.error('Erro ao registrar pessoa', error);
         }
       );
     } else {
