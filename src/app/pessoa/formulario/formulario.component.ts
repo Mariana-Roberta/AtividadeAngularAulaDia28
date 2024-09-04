@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import {Pessoa, PessoaService} from "../../services/pessoa.service";
+import { FormularioService } from "../../services/formulario.service";
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Router} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 
@@ -7,26 +9,51 @@ import {FormsModule} from "@angular/forms";
   selector: 'app-formulario',
   standalone: true,
   imports: [
+    ReactiveFormsModule,
     FormsModule
   ],
   templateUrl: './formulario.component.html',
   styleUrl: './formulario.component.css'
 })
 export class FormularioComponent {
-  pessoa: Pessoa = { id: 0, nome: '', idade: 0 };
+
+  formulario: FormGroup;
+
+  constructor(private fb: FormBuilder, private formularioService: FormularioService) {
+    this.formulario = this.fb.group({
+        nome: [''],
+        idade: [null]
+      });
+   }
+
+  ngOnInit(): void {
+    this.formulario = this.fb.group({
+      nome: ['', [Validators.required]],
+      idade: [null, [Validators.required, Validators.min(0)]]
+    });
+  }
+
+  adicionarFormulario(): void {
+    if (this.formulario.valid) {
+      this.formularioService.addFormulario(this.formulario.value);
+      this.formulario.reset();
+    }
+  }
+
+  /*formulario: Formulario = { id: 0, nome: '', idade: 0 };
 
   constructor(
-    private pessoaService: PessoaService,
+    private formularioService: FormularioService,
     private router: Router
   ) {}
 
-  adicionarPessoa(): void {
-    if (!this.pessoa.nome || this.pessoa.idade <= 0) {
+  adicionarFormulario(): void {
+    if (!this.formulario.nome || this.formulario.idade <= 0) {
       alert('Por favor, preencha todos os campos corretamente.');
       return;
     }
-    this.pessoa.id = this.pessoaService.getPessoas().length ? Math.max(...this.pessoaService.getPessoas().map(p => p.id)) + 1 : 1;
-    this.pessoaService.addPessoa(this.pessoa);
-    this.router.navigate(['/pessoa/listagem']);
-  }
+    this.formulario.id = this.formularioService.getFormularios().length ? Math.max(...this.pessoaService.getFormularios().map(p => p.id)) + 1 : 1;
+    this.formularioService.addFormulario(this.pessoa);
+    this.router.navigate(['/formulario/listaFormularios']);
+  }*/
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Pessoa, PessoaService} from "../../services/pessoa.service";
+import {FormularioService} from "../../services/formulario.service";
 import {Router} from "@angular/router";
 import {ActivatedRoute} from "@angular/router";
 import {NgIf} from "@angular/common";
@@ -14,22 +14,22 @@ import {NgIf} from "@angular/common";
   styleUrl: './visualizacao.component.css'
 })
 export class VisualizacaoComponent implements OnInit {
-  pessoa: Pessoa | undefined;
+  formulario: any | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private pessoaService: PessoaService,
+    private formularioService: FormularioService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = +params.get('id')!;
-      this.pessoa = this.pessoaService.getPessoaById(id);
+      this.formulario = this.formularioService.getFormularioById(id);
     });
   }
 
   voltarParaLista(): void {
-    this.router.navigate(['/pessoa/listagem']);
+    this.router.navigate(['/formulario/listaFormularios']);
   }
 }

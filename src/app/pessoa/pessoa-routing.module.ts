@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'visualizacao', component: VisualizacaoComponent },
   { path: 'visualizacao/:id', component: VisualizacaoComponent },
   { path: 'formulario', component: FormularioComponent },
-  { path: 'listagem', component: ListagemComponent }
+  { path: 'listaFormularios', component: ListagemComponent }
 ];
 
 @NgModule({
